@@ -14,7 +14,7 @@
 ### How to get dataset?
 - Get Video from `Youtube`.
 - Get Subtitle from `Google STT`.
-- And this process two steps.
+- And this process has two steps.
     - crawl job
         - Get video list using youtube's channelID.
         - Get video and subtitle(vtt) by `youtube-dl`.
@@ -26,7 +26,7 @@
 
 ### How to use lib?
 ```
-const GYFVD = require('../app');
+const GYFVD = require('GetYourFaceVideoData');
 
 const options = {};
 const gyfvd = new GYFVD(options);
