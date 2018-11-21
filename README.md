@@ -1,0 +1,40 @@
+## GetYourFaceVideoData
+- This script makes video data automatically that be got from youtube to face and audio for use in deep learning.
+
+### Description
+- It is dataSet that need to train LipReading.
+- Dataset is consisted of `Video` and `Subtitle`.
+- The directory structure is shown below.
+    - ./db
+        - /result
+            - /{youtube_video_id}
+                - {idx}.mp4
+                - subtitle.json
+
+### How to get dataset?
+- Get Video from `Youtube`.
+- Get Subtitle from `Google STT`.
+- And this process two steps.
+    - crawl job
+        - Get video list using youtube's channelID.
+        - Get video and subtitle(vtt) by `youtube-dl`.
+        - Transform `vtt` to `my json format` that splited word.
+    - data-process job
+        - Find just one people to face-detection, step by step.
+        - Crop image faceRect.
+        - Split video along word timetable in subtitle json.
+
+### How to use lib?
+```
+const GYFVD = require('../app');
+
+const options = {};
+const gyfvd = new GYFVD(options);
+
+const YoutubeChannelID = 'UChlgI3UHCOnwUGzWzbJ3H5w';
+const num_crawl_video = 3;
+gyfvd.crawl(YoutubeChannelID, num_crawl_video);
+
+const num_sample = 1;
+gyfvd.data_process(num_sample);
+```
