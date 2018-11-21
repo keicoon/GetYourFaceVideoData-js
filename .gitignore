@@ -1,6 +1,6 @@
-node_modules
-secret
-db
+node_modules/
+db/
+secret/
 
-*.mp4
-*.vtt
+.DS_Store
+.vscode

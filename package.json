@@ -1,6 +1,25 @@
 {
+  "name": "GetYourFaceVideoData",
+  "version": "1.0.0",
+  "description": "This script makes video data automatically that be got from youtube to face and audio for use in deep learning.",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keicoon/GetYourFaceVideoData.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keicoon/GetYourFaceVideoData/issues"
+  },
+  "homepage": "https://github.com/keicoon/GetYourFaceVideoData",
   "dependencies": {
+    "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.11",
+    "opencv4nodejs": "^4.10.1",
     "simple-youtube-api": "^5.1.1",
     "youtube-dl": "^1.12.2"
   }
