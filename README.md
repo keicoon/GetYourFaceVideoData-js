@@ -12,6 +12,7 @@
                 - subtitle.json
 - capture about file tree  
 ![](https://github.com/keicoon/GetYourFaceVideoData/blob/master/capture/result.png)
+
 ### How to get dataset?
 - Get Video from `Youtube`.
 - Get Subtitle from `Google STT`.
@@ -38,4 +39,19 @@ gyfvd.crawl(YoutubeChannelID, num_crawl_video);
 
 const num_sample = 1;
 gyfvd.data_process(num_sample);
+```
+
+### Warnning
+- Need to fill `youtube_v3_api_key` in `./secret/private.json`.
+```
+// ./secret/private.json
+{
+    "api_key": "{your_api_key}"
+}
+```
+- or be allowed from `options`.
+```
+const gyfvd = new GYFVD({
+    "api_key": "{your_api_key}
+});
 ```
