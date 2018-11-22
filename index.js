@@ -51,4 +51,9 @@ module.exports = class GYFVD {
 
         return true;
     }
+
+    async clear() {
+        // @WARN: This erases all of cache files.
+        db.clear_cache_db();
+    }
 }
