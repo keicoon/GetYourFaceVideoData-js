@@ -2,7 +2,7 @@
 - This script makes video data automatically that be got from youtube to face and audio for use in deep learning.
 
 ### Description
-- It is dataSet that need to train LipReading.
+- It is dataSet that base to train LipReading.
 - Dataset is consisted of `Video` and `Subtitle`.
 - The directory structure is shown below.
     - ./db
@@ -15,11 +15,11 @@
 - Get Video from `Youtube`.
 - Get Subtitle from `Google STT`.
 - And this process has two steps.
-    - crawl job
+    - crawling job
         - Get video list using youtube's channelID.
         - Get video and subtitle(vtt) by `youtube-dl`.
-        - Transform `vtt` to `my json format` that splited word.
-    - data-process job
+        - Transform `vtt` to `my json format` that splited words.
+    - data-processing job
         - Find just one people to face-detection, step by step.
         - Crop image faceRect.
         - Split video along word timetable in subtitle json.

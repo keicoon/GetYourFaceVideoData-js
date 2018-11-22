@@ -2,7 +2,7 @@
   "name": "GetYourFaceVideoData",
   "version": "1.0.0",
   "description": "This script makes video data automatically that be got from youtube to face and audio for use in deep learning.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "node test"
   },
