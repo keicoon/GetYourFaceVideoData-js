@@ -10,7 +10,7 @@
             - /{youtube_video_id}
                 - {idx}.mp4
                 - subtitle.json
-
+- capture about file tree ![img](https://github.com/keicoon/GetYourFaceVideoData/tree/master/capture/result.png)
 ### How to get dataset?
 - Get Video from `Youtube`.
 - Get Subtitle from `Google STT`.
