@@ -5,10 +5,12 @@ module.exports = class GYFVD {
     constructor(options = {}) {
         this.options = _.assign({
             "loud": true,
-            "api_key": db.get_priviate('api_key'),
+            "youtube_v3_api_key": db.get_priviate('youtube_v3_api_key') || '',
+            "sst_api": "etri",
             "subtitle_auto": true,
             "subtitle_lang": 'ko',
             "subtitle_download": true,
+            "subtitle_validation": false,
             "save_video_info": {
                 fourccCode: 0x00000021,
                 fps: 30,
@@ -33,8 +35,8 @@ module.exports = class GYFVD {
     }
 
     async crawl(cnannel_id, num_video = 9999) {
-        if (!this.options.api_key) {
-            throw new Error('Need to set youtube_v3 api_key');
+        if (!this.options.youtube_v3_api_key) {
+            throw new Error('Need to set youtube_v3_api_key');
         }
         const crawling = require('./lib/crawl');
         return crawling(cnannel_id, num_video, this.options);
