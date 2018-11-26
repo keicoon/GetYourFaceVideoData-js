@@ -8,6 +8,7 @@ module.exports = class GYFVD {
             "api_key": db.get_priviate('api_key'),
             "subtitle_auto": true,
             "subtitle_lang": 'ko',
+            "subtitle_download": true,
             "save_video_info": {
                 fourccCode: 0x00000021,
                 fps: 30,
