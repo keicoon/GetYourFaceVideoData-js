@@ -1,10 +1,20 @@
 const GYFVD = require('../');
 
-const gyfvd = new GYFVD();
+async function main () {
 
-// const Channel_YTN_News = 'UChlgI3UHCOnwUGzWzbJ3H5w';
-// gyfvd.crawl(Channel_YTN_News, 3);
+    const gyfvd = new GYFVD({
+        "loud": true,
+        // "subtitle_download": false
+        "subtitle_validation": true
+    });
 
-// gyfvd.data_process(1);
+    const Channel_YTN_News = 'UChlgI3UHCOnwUGzWzbJ3H5w';
 
-// gyfvd.clear();
+    // await gyfvd.crawl(Channel_YTN_News, 1);
+
+    await gyfvd.data_process(1);
+
+    // // gyfvd.clear();
+}
+
+main();
