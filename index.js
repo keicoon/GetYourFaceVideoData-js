@@ -45,9 +45,10 @@ module.exports = class GYFVD {
     }
 
     async data_process(num = 10) {
-        let num_diff = (db.get_len_db() - num);
+        const not_hurt_item_len =db.get_len_db();
+        let num_diff = (not_hurt_item_len - num);
         if (0 > num_diff) {
-            throw new Error(`Need to crawl ${num_insufficient} firstly.`);
+            throw new Error(`Available ${not_hurt_item_len}, Need to crawl ${num_diff} firstly.`);
         }
         const data_processing = require('./lib/data_process');
         for (const sample of db.get_sample(num)) {
