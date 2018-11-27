@@ -15,7 +15,7 @@
 
 ### How to get dataset?
 - Get Video from `Youtube`.
-- Get Subtitle from `Google STT`.
+- Get Subtitle from `Google STT`. And Validate that by `ETRI STT`.
 - And this process has two steps.
     - crawling job
         - Get video list using youtube's channelID.
@@ -24,7 +24,8 @@
     - data-processing job
         - Find just one people to face-detection, step by step.
         - Crop image faceRect.
-        - Split video along word timetable in subtitle json.
+        - Validate subtitle word by `ETRI STT`.
+        - Split video along word time in subtitle json.
 
 ### How to use lib?
 ```
@@ -39,19 +40,16 @@ gyfvd.crawl(YoutubeChannelID, num_crawl_video);
 
 const num_sample = 1;
 gyfvd.data_process(num_sample);
+
+// gyfvd.clear();
 ```
 
-### Warnning
-- Need to fill `youtube_v3_api_key` in `./secret/private.json`.
+### Important
+- Need to fill `{}_api_keys` in `./secret/private.json`.
 ```
-// ./secret/private.json
+// in ./secret/private.json
 {
-    "api_key": "{your_api_key}"
+    "api_key": "{your_api_key}",
+    "etri_sst_api_keys": [ "{your_api_keys}" ]
 }
-```
-- or be allowed from `options`.
-```
-const gyfvd = new GYFVD({
-    "api_key": "{your_api_key}
-});
 ```
