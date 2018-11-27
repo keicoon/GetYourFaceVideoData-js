@@ -26,7 +26,8 @@ module.exports = class GYFVD {
         }, options);
 
         if (db.get_priviate("youtube_v3_api_key") == undefined) throw new Error("set youtube_v3_api_key!")
-        if ((db.get_priviate("etri_sst_api_keys") || []).length < 1) throw new Error("set etri_sst_api_keys!")
+        if ((this.options.subtitle_validation || !this.options.subtitle_download)
+            && (db.get_priviate("etri_sst_api_keys") || []).length < 1) throw new Error("set etri_sst_api_keys!")
 
         db.get_db();
     }
