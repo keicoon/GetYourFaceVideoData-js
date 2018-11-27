@@ -39,7 +39,7 @@ module.exports = class GYFVD {
 
     async crawl(cnannel_id, num_video = 9999) {
         const crawling = require('./lib/crawl');
-        const succ_count = crawling(cnannel_id, num_video, this.options);
+        const succ_count = await crawling(cnannel_id, num_video, this.options);
         console.log(`end crawling and succ count: ${succ_count}`);
         return succ_count;
     }
