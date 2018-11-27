@@ -5,7 +5,6 @@ module.exports = class GYFVD {
     constructor(options = {}) {
         this.options = _.assign({
             "loud": true,
-            "youtube_v3_api_key": db.get_priviate('youtube_v3_api_key') || '',
             "sst_api": "etri",
             "subtitle_auto": true,
             "subtitle_lang": 'ko',
@@ -26,18 +25,18 @@ module.exports = class GYFVD {
             "sec_last_trim": 0.1
         }, options);
 
+        if (db.get_priviate("youtube_v3_api_key") == undefined) throw new Error("set youtube_v3_api_key!")
+        if ((db.get_priviate("etri_sst_api_keys") || []).length < 1) throw new Error("set etri_sst_api_keys!")
+
         db.get_db();
     }
 
     async start(cnannel_id, num_video = 9999) {
         const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
-        const result = await this.data_process(num_succ_crawled_video);
+        await this.data_process(num_succ_crawled_video);
     }
 
     async crawl(cnannel_id, num_video = 9999) {
-        if (!this.options.youtube_v3_api_key) {
-            throw new Error('Need to set youtube_v3_api_key');
-        }
         const crawling = require('./lib/crawl');
         return crawling(cnannel_id, num_video, this.options);
     }
