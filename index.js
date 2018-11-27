@@ -40,7 +40,7 @@ module.exports = class GYFVD {
     async crawl(cnannel_id, num_video = 9999) {
         const crawling = require('./lib/crawl');
         const succ_count = await crawling(cnannel_id, num_video, this.options);
-        console.log(`end crawling and succ count: ${succ_count}`);
+        console.log(`End crawling and succ count: ${succ_count}`);
         return succ_count;
     }
 
@@ -53,7 +53,7 @@ module.exports = class GYFVD {
         for (const sample of db.get_sample(num)) {
             await data_processing(sample.path_video, sample.path_subtitle, this.options);
         };
-        console.log(`end data_process`);
+        console.log(`End data_process`);
         return true;
     }
 
