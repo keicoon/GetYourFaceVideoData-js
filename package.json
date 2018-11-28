@@ -23,5 +23,8 @@
     "opencv4nodejs": "^4.10.1",
     "simple-youtube-api": "^5.1.1",
     "youtube-dl": "^1.12.2"
+  },
+  "devDependencies": {
+    "argparse": "^1.0.10"
   }
 }

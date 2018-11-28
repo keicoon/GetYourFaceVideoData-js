@@ -44,6 +44,11 @@ gyfvd.data_process(num_sample);
 // gyfvd.clear();
 ```
 
+### Run by node
+```
+$ node test -c=youtube_channel_id -n=500
+```
+
 ### Important
 - Need to fill `{}_api_keys` in `./secret/private.json`.
 ```

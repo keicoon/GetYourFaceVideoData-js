@@ -1,18 +1,36 @@
-const GYFVD = require('../');
+let ArgumentParser = require('argparse').ArgumentParser;
+let parser = new ArgumentParser({
+  version: '0.0.1',
+  addHelp:true,
+  description: 'GetYourFaceVideoData'
+});
+parser.addArgument(
+  [ '-c', '--channel' ],
+  {
+    help: 'UChlgI3UHCOnwUGzWzbJ3H5w'
+  }
+);
+parser.addArgument(
+  [ '-n', '--num' ],
+  {
+    type: 'int',
+    help: 500
+  }
+);
+let args = parser.parseArgs();
 
 async function main () {
-
+    const GYFVD = require('../');
     const gyfvd = new GYFVD({
-        "loud": false,
+        "log_level": "trace", //"info"
         "subtitle_download": true,
         "subtitle_validation": true
     });
 
-    const Channel_YTN_News = 'UChlgI3UHCOnwUGzWzbJ3H5w';
+    await gyfvd.start(args.channel, args.num);
 
-    await gyfvd.crawl(Channel_YTN_News, 1);
-
-    await gyfvd.data_process(1);
+    // await gyfvd.crawl(args.channel, args.num);
+    // await gyfvd.data_process(args.num);
 
     await gyfvd.clear();
 }
