@@ -34,7 +34,7 @@ module.exports = class GYFVD {
                 scaleFactor: 1.2,
                 minNeighbors: 10
             },
-            "sec_last_trim": 0.1
+            "py_process": []
         }, options);
 
         if (db.get_priviate("youtube_v3_api_key") == undefined) throw new Error("set youtube_v3_api_key!")
@@ -51,6 +51,7 @@ module.exports = class GYFVD {
         try {
             const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
             await this.data_process(num_succ_crawled_video);
+            await require('./lib/post_process/python')(this.options);
         } catch (e) {
             this.options.logger.error('e');
         }
