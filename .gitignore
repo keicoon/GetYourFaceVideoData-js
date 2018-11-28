@@ -1,6 +1,7 @@
 node_modules/
 db/
 secret/
+sample/
 
 .DS_Store
 .vscode

@@ -8,7 +8,7 @@ log4js.configure({
         }
     },
     categories: { 
-        trace: { appenders: ['file'], level: 'trace' },
+        default: { appenders: ['file'], level: 'trace' },
         info: { appenders: ['file'], level: 'info' } 
     }
 });
