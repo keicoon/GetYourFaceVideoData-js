@@ -19,6 +19,7 @@
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.11",
+    "log4js": "^3.0.6",
     "opencv4nodejs": "^4.10.1",
     "simple-youtube-api": "^5.1.1",
     "youtube-dl": "^1.12.2"

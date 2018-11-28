@@ -1,10 +1,19 @@
 const _ = require('lodash');
 const db = require('./lib/db');
+const log4js = require('log4js');
+log4js.configure({
+    appenders: {
+        file: {
+            type: 'file', filename: 'GUFV.log', encoding: 'utf-8'
+        }
+    },
+    categories: { default: { appenders: ['file'], level: 'error' } }
+});
 
 module.exports = class GYFVD {
     constructor(options = {}) {
         this.options = _.assign({
-            "loud": true,
+            "log_level": "default",
             "sst_api": "etri",
             "subtitle_auto": true,
             "subtitle_lang": 'ko',
@@ -29,6 +38,9 @@ module.exports = class GYFVD {
         if ((this.options.subtitle_validation || !this.options.subtitle_download)
             && (db.get_priviate("etri_sst_api_keys") || []).length < 1) throw new Error("set etri_sst_api_keys!")
 
+        logger.level = this.options.log_level;
+        this.options.logger = log4js.getLogger();
+
         db.get_db();
     }
 
@@ -40,7 +52,7 @@ module.exports = class GYFVD {
     async crawl(cnannel_id, num_video = 9999) {
         const crawling = require('./lib/crawl');
         const succ_count = await crawling(cnannel_id, num_video, this.options);
-        console.log(`End crawling and succ count: ${succ_count}`);
+        this.options.logger.info(`End crawling and succ count: ${succ_count}`);
         return succ_count;
     }
 
@@ -54,7 +66,7 @@ module.exports = class GYFVD {
         for (const sample of db.get_sample(num)) {
             await data_processing(sample.path_video, sample.path_subtitle, this.options);
         };
-        console.log(`End data_process`);
+        this.options.logger.info(`End data_process`);
         return true;
     }
 
