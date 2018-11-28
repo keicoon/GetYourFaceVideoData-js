@@ -4,10 +4,13 @@ const log4js = require('log4js');
 log4js.configure({
     appenders: {
         file: {
-            type: 'file', filename: 'GUFV.log', encoding: 'utf-8'
+            type: 'file', filename: 'gyfvd.log', encoding: 'utf-8'
         }
     },
-    categories: { default: { appenders: ['file'], level: 'error' } }
+    categories: { 
+        trace: { appenders: ['file'], level: 'trace' },
+        info: { appenders: ['file'], level: 'info' } 
+    }
 });
 
 module.exports = class GYFVD {
@@ -44,19 +47,19 @@ module.exports = class GYFVD {
         db.get_db();
     }
 
-    async start(cnannel_id, num_video = 9999) {
+    async start(cnannel_id, num_video) {
         const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
         await this.data_process(num_succ_crawled_video);
     }
 
-    async crawl(cnannel_id, num_video = 9999) {
+    async crawl(cnannel_id, num_video) {
         const crawling = require('./lib/crawl');
         const succ_count = await crawling(cnannel_id, num_video, this.options);
         this.options.logger.info(`End crawling and succ count: ${succ_count}`);
         return succ_count;
     }
 
-    async data_process(num = 10) {
+    async data_process(num) {
         const not_hurt_item_len = db.get_len_db();
         let num_diff = (num - not_hurt_item_len);
         if (num_diff > 0) {
