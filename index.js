@@ -41,8 +41,8 @@ module.exports = class GYFVD {
         if ((this.options.subtitle_validation || !this.options.subtitle_download)
             && (db.get_priviate("etri_sst_api_keys") || []).length < 1) throw new Error("set etri_sst_api_keys!")
 
-        logger.level = this.options.log_level;
         this.options.logger = log4js.getLogger();
+        this.options.logger.level = this.options.log_level;
 
         db.get_db();
     }
