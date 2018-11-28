@@ -25,6 +25,7 @@
     "youtube-dl": "^1.12.2"
   },
   "devDependencies": {
-    "argparse": "^1.0.10"
+    "argparse": "^1.0.10",
+    "hangul-asm-tmp": "^1.1.0"
   }
 }
