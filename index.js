@@ -7,9 +7,9 @@ log4js.configure({
             type: 'file', filename: 'gyfvd.log', encoding: 'utf-8'
         }
     },
-    categories: { 
+    categories: {
         default: { appenders: ['file'], level: 'trace' },
-        info: { appenders: ['file'], level: 'info' } 
+        info: { appenders: ['file'], level: 'info' }
     }
 });
 
@@ -48,8 +48,12 @@ module.exports = class GYFVD {
     }
 
     async start(cnannel_id, num_video) {
-        const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
-        await this.data_process(num_succ_crawled_video);
+        try {
+            const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
+            await this.data_process(num_succ_crawled_video);
+        } catch (e) {
+            this.options.logger.error('e');
+        }
     }
 
     async crawl(cnannel_id, num_video) {
