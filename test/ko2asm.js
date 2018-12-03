@@ -42,7 +42,7 @@ async function convert(paths) {
         })));
 
         await fs.writeFileSync(path, JSON.stringify(subtitles, null, 4), 'utf8');
-        console.log(`${idx++}/${total_num} : ${path}`);
+        console.log(`${++idx}/${total_num} : ${path}`);
     }
     console.log('convert end');
 }
