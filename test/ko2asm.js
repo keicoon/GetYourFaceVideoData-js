@@ -1,6 +1,7 @@
 var fs = require('fs')
 var path = require('path');
 var hangul_asm = require('hangul-asm-tmp');
+var _ = require('lodash');
 
 function get_subtitle_in_list(root_path) {
     var paths = [root_path], find_paths = [];
@@ -35,10 +36,13 @@ async function convert(paths) {
     for (const path of paths) {
         var subtitles = JSON.parse(await fs.readFileSync(path, 'utf8'));
 
-        subtitles = subtitles.map(w => ({ "part": hangul_asm.encode(w), "origin": w }));
+        subtitles = subtitles.map(ws => (_.assign(ws, {
+            "part": hangul_asm.encode(ws.part),
+            "origin": ws.part
+        })));
 
         await fs.writeFileSync(path, JSON.stringify(subtitles, null, 4), 'utf8');
-        console.log(idx++, '/', total_num);
+        console.log(`${idx++}/${total_num} : ${path}`);
     }
     console.log('convert end');
 }
