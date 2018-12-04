@@ -53,7 +53,7 @@ module.exports = class GYFVD {
             await this.data_process(num_succ_crawled_video);
             await require('./lib/post_process/python')(this.options);
         } catch (e) {
-            this.options.logger.error('e');
+            this.options.logger.error('start', e);
         }
     }
 
