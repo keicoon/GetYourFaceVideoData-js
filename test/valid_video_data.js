@@ -23,7 +23,7 @@ files.forEach(file_name => {
 var list = db.get_db();
 
 find_paths.forEach(file_path => {
-    options.logger.info('remove invalid video data', file_path);
+    console.log('remove invalid video data', file_path);
     var basename = path.basename(file_path, 'mp4');
     delete list[basename];
     fs.unlinkSync(file_path);
