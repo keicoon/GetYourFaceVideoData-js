@@ -58,3 +58,9 @@ $ node test -c=youtube_channel_id -n=500
     "etri_sst_api_keys": [ "{your_api_keys}" ]
 }
 ```
+- Dependency
+    - opencv
+    - ffmpeg
+```
+sudo .prerequirement/ubuntu.sh
+```
