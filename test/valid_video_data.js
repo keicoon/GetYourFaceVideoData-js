@@ -4,10 +4,11 @@ const db = require('../lib/db');
 
 let find_paths = [];
 
-const files = fs.readdirSync(db.PATH_VIDEO);
+const root_path = db.PATH_VIDEO;
+const files = fs.readdirSync(root_path);
 
 files.forEach(file_name => {
-    var cur_full_path = path.resolve(cur_path, file_name)
+    var cur_full_path = path.resolve(root_path, file_name)
     var stat = fs.statSync(cur_full_path)
     if (stat.isDirectory()) {
         paths.push(cur_full_path)
