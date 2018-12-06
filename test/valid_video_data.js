@@ -15,7 +15,8 @@ if (mode == 'empty') {
         const cur_full_path = path.resolve(PATH_VIDEO, file_name)
         const stat = fs.statSync(cur_full_path)
         if (stat.isFile()) {
-            find_files.push(file_name)
+            const basename = path.basename(file_name, '.mp4');
+            find_files.push(basename)
         }
     })
     let new_list = {};
@@ -33,9 +34,10 @@ if (mode == 'empty') {
         const cur_full_path = path.resolve(PATH_VIDEO, file_name)
         const stat = fs.statSync(cur_full_path)
         if (stat.isFile()) {
-            new_list[file_name] = {
-                path_video: `${PATH_VIDEO}/${file_name}.mp4`,
-                path_subtitle: `${PATH_SUBTITLE}/${file_name}.json`
+            const basename = path.basename(file_name, '.mp4');
+            new_list[basename] = {
+                path_video: `${PATH_VIDEO}/${basename}.mp4`,
+                path_subtitle: `${PATH_SUBTITLE}/${basename}.json`
             }
         }
     })
@@ -55,7 +57,7 @@ if (mode == 'empty') {
     console.log('prev db length:', Object.keys(list).length);
     find_paths.forEach(file_path => {
         console.log('remove invalid video data', file_path);
-        const basename = path.basename(file_path, 'mp4');
+        const basename = path.basename(file_path, '.mp4');
         delete list[basename];
         fs.unlinkSync(file_path);
     })
