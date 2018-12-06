@@ -2,31 +2,49 @@ const fs = require('fs');
 const path = require('path');
 const db = require('../lib/db');
 
-let find_paths = [];
-
 const root_path = db.PATH_VIDEO;
 const files = fs.readdirSync(root_path);
 
-files.forEach(file_name => {
-    var cur_full_path = path.resolve(root_path, file_name)
-    var stat = fs.statSync(cur_full_path)
-    if (stat.isDirectory()) {
-        paths.push(cur_full_path)
-    } else if (stat.isFile()) {
-        if (stat.size < 100) {
-            // @delete
-            find_paths.push(cur_full_path)
+const mode = process.argv[2];
+let list = db.get_db();
+
+console.log('working mode is', mode);
+if (mode == 'empty') {
+    let find_files = [];
+    files.forEach(file_name => {
+        const cur_full_path = path.resolve(root_path, file_name)
+        const stat = fs.statSync(cur_full_path)
+        if (stat.isFile()) {
+            find_files.push(file_name)
+        }
+    })
+    let new_list = {};
+    for (const key in list) {
+        if (find_files.includes(key)) {
+            new_list[key] = list[key];
         }
     }
-})
-
-var list = db.get_db();
-
-find_paths.forEach(file_path => {
-    console.log('remove invalid video data', file_path);
-    var basename = path.basename(file_path, 'mp4');
-    delete list[basename];
-    fs.unlinkSync(file_path);
-})
-
-fs.writeFileSync(db.PATB_DB_LIST, JSON.stringify(list, null, 4), 'utf8');
+    console.log('prev db length:', Object.keys(list).length);
+    console.log('aftr db length:', Object.keys(new_list).length);
+    fs.writeFileSync(db.PATB_DB_LIST, JSON.stringify(new_list, null, 4), 'utf8');
+} else if (mode == 'size100') {
+    let find_paths = [];
+    files.forEach(file_name => {
+        const cur_full_path = path.resolve(root_path, file_name)
+        const stat = fs.statSync(cur_full_path)
+        if (stat.isFile()) {
+            if (stat.size < 100) {
+                find_paths.push(cur_full_path)
+            }
+        }
+    })
+    console.log('prev db length:', Object.keys(list).length);
+    find_paths.forEach(file_path => {
+        console.log('remove invalid video data', file_path);
+        const basename = path.basename(file_path, 'mp4');
+        delete list[basename];
+        fs.unlinkSync(file_path);
+    })
+    console.log('aftr db length:', Object.keys(list).length);
+    fs.writeFileSync(db.PATB_DB_LIST, JSON.stringify(list, null, 4), 'utf8');
+}
