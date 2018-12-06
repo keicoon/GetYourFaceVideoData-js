@@ -30,7 +30,7 @@ if (mode == 'empty') {
 } else if (mode == 'generate') {
     let new_list = {};
     files.forEach(file_name => {
-        const cur_full_path = path.resolve(root_path, file_name)
+        const cur_full_path = path.resolve(PATH_VIDEO, file_name)
         const stat = fs.statSync(cur_full_path)
         if (stat.isFile()) {
             new_list[file_name] = {
@@ -44,7 +44,7 @@ if (mode == 'empty') {
 } else if (mode == 'size100') {
     let find_paths = [];
     files.forEach(file_name => {
-        const cur_full_path = path.resolve(root_path, file_name)
+        const cur_full_path = path.resolve(PATH_VIDEO, file_name)
         const stat = fs.statSync(cur_full_path)
         if (stat.isFile()) {
             if (stat.size < 100) {
