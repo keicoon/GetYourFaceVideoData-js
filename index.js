@@ -1,10 +1,16 @@
 const _ = require('lodash');
 const db = require('./lib/db');
 const log4js = require('log4js');
+
+function get_date_now() {
+    const dt = new Date();
+    return [dt.getFullYear(), (dt.getMonth() + 1), dt.getDate()].join('_');
+}
+
 log4js.configure({
     appenders: {
         file: {
-            type: 'file', filename: 'gyfvd.log', encoding: 'utf-8'
+            type: 'file', filename: `${get_date_now()}.log`, encoding: 'utf-8'
         }
     },
     categories: {
