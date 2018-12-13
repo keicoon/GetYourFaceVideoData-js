@@ -57,7 +57,7 @@ module.exports = class GYFVD {
         try {
             const num_succ_crawled_video = await this.crawl(cnannel_id, num_video);
             await this.data_process(num_succ_crawled_video);
-            await require('./lib/post_process/python')(this.options);
+            await this.python_process();
         } catch (e) {
             this.options.logger.error('start', e);
         }
@@ -76,12 +76,19 @@ module.exports = class GYFVD {
         if (num_diff > 0) {
             throw new Error(`Available ${not_hurt_item_len}, Need to crawl ${num_diff} firstly.`);
         }
+        const samples = db.get_sample(num);
         const data_processing = require('./lib/data_process');
-        for (const sample of db.get_sample(num)) {
+        this.options.logger.info(`Start data_process: ${num}, avaiable: ${not_hurt_item_len}`);
+        for (const sample of samples) {
             await data_processing(sample.path_video, sample.path_subtitle, this.options);
         };
         this.options.logger.info(`End data_process`);
         return true;
+    }
+
+    async python_process() {
+        const scripts = require('./lib/post_process/python');
+        await scripts(this.options);
     }
 
     async clear() {
