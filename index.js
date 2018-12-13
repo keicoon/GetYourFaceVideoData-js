@@ -40,6 +40,11 @@ module.exports = class GYFVD {
                 scaleFactor: 1.2,
                 minNeighbors: 10
             },
+            "silence_info": {
+                ffmpegPath: "ffmpeg",
+                maxNoiseLevel: -40,
+                minSilenceLength: 0.1 
+            },
             "py_process": []
         }, options);
 
