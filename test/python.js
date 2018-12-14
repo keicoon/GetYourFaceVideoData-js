@@ -12,8 +12,11 @@ async function main() {
             },
         },
         "py_process": [{
-            "path_script": "./test/test.py",
-            "args": ["--data_path=../db/", "--split_by_sentence"]
+            "path_script": "./test.py",
+            "args": ["--data_path=../db/test.txt", "--split_by_sentence"],
+            "spawn_option": {
+                "cwd": "/Users/jogyuhyeon/Documents/GetYourFaceVideoData-js/test/"
+            }
         }]
     });
 }

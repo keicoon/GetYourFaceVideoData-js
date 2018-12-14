@@ -6,3 +6,12 @@ args = parser.parse_args()
 
 print('data_path : {}'.format(args.data_path))
 print('split_by_sentence : {}'.format(args.split_by_sentence))
+
+file = open(args.data_path, "r") 
+print(file.read())
+
+import os
+print(os.getcwd())
+
+file2 = open('./test2.txt', 'r')
+print(file2.read())
